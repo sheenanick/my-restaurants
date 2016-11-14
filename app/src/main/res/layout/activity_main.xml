@@ -39,7 +39,8 @@
         android:textSize="40sp"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/appNameTextView" />
 
     <EditText
         android:layout_width="wrap_content"
