@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,6 +76,11 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String password = mPassword.getText().toString().trim();
         String confirmPassword = mConfirmPassword.getText().toString().trim();
 
+        boolean validName = isValidName(name);
+        boolean validEmail = isValidEmail(email);
+        boolean validPassword = isValidPassword(password, confirmPassword);
+        if (!validName || !validEmail || !validPassword) return;
+
         mAuthProgressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -88,6 +94,33 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                         }
                     }
                 });
+    }
+
+    private boolean isValidName(String name) {
+        if (name.equals("")) {
+            mName.setError("Please enter your name");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidEmail(String email) {
+        boolean isGoodEmail = (email != null && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        if (!isGoodEmail) {
+            mEmail.setError("Please enter a valid email address");
+        }
+        return isGoodEmail;
+    }
+
+    private boolean isValidPassword(String password, String confirmPassword) {
+        if (password.length() < 6) {
+            mPassword.setError("Please create a password containing at least 6 characters");
+            return false;
+        } else if (!password.equals(confirmPassword)) {
+            mPassword.setError("Passwords do not match");
+            return false;
+        }
+        return true;
     }
 
     private void createAuthStateListener() {
