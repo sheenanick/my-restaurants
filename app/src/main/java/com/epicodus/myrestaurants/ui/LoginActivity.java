@@ -1,5 +1,6 @@
 package com.epicodus.myrestaurants.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Bind(R.id.registerTextView) TextView mRegisterTextView;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private ProgressDialog mAuthProgressDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +48,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         };
-
         mRegisterTextView.setOnClickListener(this);
         mLoginButton.setOnClickListener(this);
+
+        createAuthProgressDialog();
     }
 
     @Override
@@ -63,6 +66,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setCancelable(false);
+    }
+
     private void loginUser() {
         String email = mEmail.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
@@ -74,6 +84,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mPassword.setError("Password cannot be blank");
             return;
         }
+        mAuthProgressDialog.show();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
