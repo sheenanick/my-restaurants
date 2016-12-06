@@ -16,7 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/imageView"
-        tools:scaleType="centerCrop" />
+        android:scaleType="centerCrop"/>
 
     <Button
         android:text="Find Restaurants"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:text="MyRestaurants"
         android:layout_marginTop="124dp"
-        tools:textColor="@color/colorIcons"
+        android:textColor="@color/colorIcons"
         android:textSize="40sp"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
