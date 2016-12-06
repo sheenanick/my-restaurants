@@ -11,7 +11,7 @@
         android:background="@color/colorPrimary">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="275dp"
             android:id="@+id/restaurantImageView"
             android:src="@drawable/waffles"
             android:scaleType="centerCrop" />
@@ -76,6 +76,7 @@
                     android:drawablePadding="4dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:textColor="@color/colorIcons"
                     android:layout_marginBottom="10dp"
                     android:gravity="center" />
                 <TextView
@@ -86,6 +87,7 @@
                     android:drawablePadding="4dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:textColor="@color/colorIcons"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"/>
                 <TextView
@@ -96,6 +98,7 @@
                     android:id="@+id/addressTextView"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:textColor="@color/colorIcons"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_vertical"/>
             </LinearLayout>
