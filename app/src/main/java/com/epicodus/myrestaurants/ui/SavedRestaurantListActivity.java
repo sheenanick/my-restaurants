@@ -13,7 +13,6 @@ import com.epicodus.myrestaurants.adapters.FirebaseRestaurantViewHolder;
 import com.epicodus.myrestaurants.models.Restaurant;
 import com.epicodus.myrestaurants.util.OnStartDragListener;
 import com.epicodus.myrestaurants.util.SimpleItemTouchHelperCallback;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
