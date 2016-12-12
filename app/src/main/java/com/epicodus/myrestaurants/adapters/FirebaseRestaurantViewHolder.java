@@ -2,6 +2,7 @@ package com.epicodus.myrestaurants.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,11 +46,11 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
 
     @Override
     public void onItemSelected() {
-
+        Log.d("Animation", "onItemSelected");
     }
 
     @Override
     public void onItemClear() {
-
+        Log.d("Animation", "onItemClear");
     }
 }
