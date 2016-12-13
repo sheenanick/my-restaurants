@@ -22,7 +22,7 @@
         android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Restaurants"
+        android:text="@string/my_restaurants"
         android:textColor="@color/colorIcons"
         android:textSize="42sp"
         android:textStyle="bold"
@@ -32,7 +32,7 @@
 
     <Button
         android:id="@+id/findRestaurantsButton"
-        android:text="Find Restaurants"
+        android:text="@string/find_restaurants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
