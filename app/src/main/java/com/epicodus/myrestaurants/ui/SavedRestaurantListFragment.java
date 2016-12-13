@@ -58,7 +58,6 @@ public class SavedRestaurantListFragment extends Fragment implements OnStartDrag
                 query, this, getActivity());
 
         mRecyclerView.setHasFixedSize(true);
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mFirebaseAdapter);
 
