@@ -78,14 +78,6 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
         }
 
-        private void createDetailsFragment(int position) {
-            RestaurantDetailFragment detailFragment = RestaurantDetailFragment.newInstance(mRestaurants, position);
-            FragmentTransaction ft = ((FragmentActivity) mContext).getSup
-
-        }
-
-        }
-
         public void bindRestaurant(Restaurant restaurant) {
             Picasso.with(mContext)
                     .load(restaurant.getImageUrl())
@@ -98,13 +90,29 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
         }
 
+        private void createDetailFragment(int position) {
+            // Creates new RestaurantDetailFragment with the given position:
+            RestaurantDetailFragment detailFragment = RestaurantDetailFragment.newInstance(mRestaurants, position);
+            // Gathers necessary components to replace the FrameLayout in the layout with the RestaurantDetailFragment:
+            FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
+            //  Replaces the FrameLayout with the RestaurantDetailFragment:
+            ft.replace(R.id.restaurantDetailContainer, detailFragment);
+            // Commits these changes:
+            ft.commit();
+        }
+
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
-            intent.putExtra("position", itemPosition);
-            intent.putExtra("restaurants", Parcels.wrap(mRestaurants));
-            mContext.startActivity(intent);
+
+            if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+               createDetailFragment(itemPosition);
+            } else {
+                Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
+                intent.putExtra("position", itemPosition);
+                intent.putExtra("restaurants", Parcels.wrap(mRestaurants));
+                mContext.startActivity(intent);
+            }
         }
     }
 }
