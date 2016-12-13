@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.epicodus.myrestaurants.Constants;
 import com.epicodus.myrestaurants.R;
 import com.epicodus.myrestaurants.models.Restaurant;
 import com.epicodus.myrestaurants.ui.RestaurantDetailActivity;
@@ -66,7 +67,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         private int mOrientation;
         private Context mContext;
         private ArrayList<Restaurant> mRestaurants = new ArrayList<>();
-        private OnRestaurantSelectedListener mRestauranSelectedListener;
+        private OnRestaurantSelectedListener mRestaurantSelectedListener;
 
         public RestaurantViewHolder(View itemView, ArrayList<Restaurant> restaurants, OnRestaurantSelectedListener restaurantSelectedListener) {
             super(itemView);
@@ -75,7 +76,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             mContext = itemView.getContext();
             mOrientation = itemView.getResources().getConfiguration().orientation;
             mRestaurants = restaurants;
-            mRestauranSelectedListener = restaurantSelectedListener;
+            mRestaurantSelectedListener = restaurantSelectedListener;
 
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                 createDetailFragment(0);
@@ -98,26 +99,23 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         }
 
         private void createDetailFragment(int position) {
-            // Creates new RestaurantDetailFragment with the given position:
-            RestaurantDetailFragment detailFragment = RestaurantDetailFragment.newInstance(mRestaurants, position);
-            // Gathers necessary components to replace the FrameLayout in the layout with the RestaurantDetailFragment:
+            RestaurantDetailFragment detailFragment = RestaurantDetailFragment.newInstance(mRestaurants, position, Constants.SOURCE_FIND);
             FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
-            //  Replaces the FrameLayout with the RestaurantDetailFragment:
             ft.replace(R.id.restaurantDetailContainer, detailFragment);
-            // Commits these changes:
             ft.commit();
         }
 
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
-            mRestauranSelectedListener.onRestaurantSelected(itemPosition, mRestaurants);
+            mRestaurantSelectedListener.onRestaurantSelected(itemPosition, mRestaurants, Constants.SOURCE_FIND);
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                createDetailFragment(itemPosition);
             } else {
                 Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
                 intent.putExtra("position", itemPosition);
                 intent.putExtra("restaurants", Parcels.wrap(mRestaurants));
+                intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_FIND);
                 mContext.startActivity(intent);
             }
         }

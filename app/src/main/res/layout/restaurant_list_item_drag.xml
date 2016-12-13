@@ -9,7 +9,7 @@
         android:layout_height="wrap_content">
         <ImageView
             android:layout_width="130dp"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:id="@+id/restaurantImageView"
             android:src="@drawable/waffles"
             android:scaleType="centerCrop"/>
